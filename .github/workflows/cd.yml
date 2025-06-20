@@ -21,3 +21,18 @@ jobs:
 
       - name: Build binary
         run: ./scripts/buildprod.sh
+
+      - name: setup-gcloud
+        uses: google-github-actions/setup-gcloud@v4
+        with:
+          version: "latest"
+          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v2"
+
+      - name: "Use gcloud CLI"
+        run: "gcloud info"
+
+      - name: "Push to GCP"
+        run: gcloud builds submit --tag us-central1-docker.pkg.dev/notely-463510/notely-ar-repo/notely:latest .
