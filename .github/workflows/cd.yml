@@ -21,12 +21,10 @@ jobs:
 
       - name: Build binary
         run: ./scripts/buildprod.sh
-
-      - name: setup-gcloud
-        uses: google-github-actions/setup-gcloud@v4
+      - id: "auth"
+        uses: "google-github-actions/auth@v2"
         with:
-          version: "latest"
-          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+          credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
 
       - name: "Set up Cloud SDK"
         uses: "google-github-actions/setup-gcloud@v2"
