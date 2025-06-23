@@ -27,7 +27,7 @@ jobs:
         run: ./scripts/buildprod.sh
 
       - name: Run migrations
-        run: goose -dir migrations postgres "${{ secrets.DATABASE_URL }}" up
+        run: ./scripts/migrateup.sh
       - id: "auth"
         uses: "google-github-actions/auth@v2"
         with:
